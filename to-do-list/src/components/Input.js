@@ -4,6 +4,7 @@ function Input(j) {
   const [createRender, setCreateRender] = j.createRender;
   const handleSubmit = (e) => {
     e.preventDefault();
+    const today = new Date().toISOString().slice(0, 10);
     console.log(e.target[0].value);
     fetch("http://localhost:3002/api/createLists", {
       method: "POST",
@@ -12,6 +13,8 @@ function Input(j) {
       },
       body: JSON.stringify({
         list: e.target[0].value,
+        startDate: today,
+        taskEnd: false,
       }),
     })
       .then((res) => res.json())
